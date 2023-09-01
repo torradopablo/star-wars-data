@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { CharacterService } from './characters.service';
 import { ApiTags } from '@nestjs/swagger';
 import { PointerCharacters } from './interfaces/pointer-characters.interface';
@@ -9,7 +9,7 @@ export class CharacterController {
   constructor(private characterService: CharacterService) {}
 
   @Get()
-  findAll(): Object {
-    return this.characterService.findAll();
+  findAll(@Query() query): Promise<PointerCharacters> {
+    return this.characterService.findAll(query);
   }
 }

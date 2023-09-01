@@ -1,13 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
 import { PointerCharacters } from './interfaces/pointer-characters.interface';
+const queryString = require('querystring');
+
 
 @Injectable()
 export class CharacterService {
-  async findAll(): Promise<PointerCharacters[]> {
+  async findAll(query:JSON): Promise<PointerCharacters> {
     try{
-      //console.log((await axios.get('https://swapi.dev/api/people/?search=32')).data)
-      const { data } = await axios.get('https://swapi.dev/api/people/');
+      const baseURL = 'https://swapi.dev/api/people/';
+      const queryParams = queryString.stringify(query);
+      const urlWithQuery = `${baseURL}?${queryParams}`;
+      const { data } = await axios.get(urlWithQuery);
       return data;
     } catch (error) {
       throw (error);
