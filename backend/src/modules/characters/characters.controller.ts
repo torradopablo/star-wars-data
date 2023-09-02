@@ -28,4 +28,13 @@ export class CharacterController {
   findOne(@Param() params: { id: number }): Promise<Character> {
     return this.characterService.findOne(params.id);
   }
+
+  @Get('/:id/details')
+  @ApiCreatedResponse({
+    description: 'Get one character information by id with details',
+    type: CharacterModel,
+  })
+  findOneWithDetails(@Param() params: { id: number }): Promise<Character> {
+    return this.characterService.findOneWithDetails(params.id);
+  }
 }
