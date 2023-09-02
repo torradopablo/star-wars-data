@@ -10,6 +10,7 @@ async function bootstrap() {
     .setDescription('Get all information about Star Wars')
     .setVersion('1.0.0')
     .addTag('characters')
+    .addTag('films')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
