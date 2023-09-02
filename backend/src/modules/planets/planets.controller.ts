@@ -1,6 +1,11 @@
 import { Controller, Get, Param, Query } from '@nestjs/common';
 import { PlanetService } from './planets.service';
-import { ApiTags, ApiCreatedResponse } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiCreatedResponse,
+  ApiParam,
+  ApiQuery,
+} from '@nestjs/swagger';
 import { PointerPlanets } from './interfaces/pointer-planets.interface';
 import { PointerPlanetsModel } from './models/pointer-planets.mode';
 import { Planet } from './interfaces/planets.interface';
@@ -16,6 +21,7 @@ export class PlanetController {
     description: 'Get planets information',
     type: PointerPlanetsModel,
   })
+  @ApiQuery({ name: 'search', type: String, required: false })
   findAll(@Query() query: JSON): Promise<PointerPlanets> {
     return this.planetService.findAll(query);
   }
@@ -25,6 +31,7 @@ export class PlanetController {
     description: 'Get one planet information by id',
     type: PlanetModel,
   })
+  @ApiParam({ name: 'id', description: 'ID of character', type: Number })
   findOne(@Param() params: { id: number }): Promise<Planet> {
     return this.planetService.findOne(params.id);
   }

@@ -1,6 +1,11 @@
 import { Controller, Get, Param, Query } from '@nestjs/common';
 import { FilmService } from './films.service';
-import { ApiTags, ApiCreatedResponse } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiCreatedResponse,
+  ApiQuery,
+  ApiParam,
+} from '@nestjs/swagger';
 import { PointerFilms } from './interfaces/pointer-films.interface';
 import { PointerFilmsModel } from './models/pointer-films.mode';
 import { Film } from './interfaces/films.interface';
@@ -16,6 +21,7 @@ export class FilmController {
     description: 'Get films information',
     type: PointerFilmsModel,
   })
+  @ApiQuery({ name: 'search', type: String, required: false })
   findAll(@Query() query: JSON): Promise<PointerFilms> {
     return this.filmService.findAll(query);
   }
@@ -25,6 +31,7 @@ export class FilmController {
     description: 'Get one film information by id',
     type: FilmModel,
   })
+  @ApiParam({ name: 'id', description: 'ID of film', type: Number })
   findOne(@Param() params: { id: number }): Promise<Film> {
     return this.filmService.findOne(params.id);
   }
