@@ -1,0 +1,21 @@
+name: frontend-test
+
+on:
+  pull_request:
+    type:
+      - opened
+    branches: [ main ]
+
+
+jobs:
+  eslint:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: eslint
+      run:  cd frontend && npm install && npm run lint 
+  
+
