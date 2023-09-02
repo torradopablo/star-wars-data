@@ -24,6 +24,8 @@ export class PointerCharactersModel implements PointerCharacters {
   @ApiProperty()
   hair_color: string;
 
-  @ApiProperty()
+  @ApiProperty({
+    type: [CharacterModel],
+  })
   result: CharacterModel[];
 }
