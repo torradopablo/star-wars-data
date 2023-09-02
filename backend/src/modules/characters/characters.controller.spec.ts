@@ -14,9 +14,13 @@ describe('AppController', () => {
     characterController = app.get<CharacterController>(CharacterController);
   });
 
-  describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(characterController.findAll({})).toBe('Hello World!');
+  describe('getLuck', () => {
+    it('should return Luke Skywalker', async () => {
+      const lukeName: string = 'Luke Skywalker';
+      const query: { search: string } = { search: 'luke' };
+      const data = await characterController.findAll(Object(query));
+      console.log(data);
+      expect(data.results[0].name).toBe(lukeName);
     });
   });
 });

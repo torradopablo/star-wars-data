@@ -11,10 +11,10 @@ export class CharacterController {
 
   @Get()
   @ApiCreatedResponse({
-    description: 'The record has been successfully created.',
+    description: 'Get characters information',
     type: PointerCharactersModel,
   })
-  findAll(@Query() query): Promise<PointerCharacters> {
+  findAll(@Query() query: JSON): Promise<PointerCharacters> {
     return this.characterService.findAll(query);
   }
 }

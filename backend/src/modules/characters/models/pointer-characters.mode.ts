@@ -27,5 +27,5 @@ export class PointerCharactersModel implements PointerCharacters {
   @ApiProperty({
     type: [CharacterModel],
   })
-  result: CharacterModel[];
+  results: CharacterModel[];
 }
