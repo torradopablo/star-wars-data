@@ -14,13 +14,21 @@ describe('AppController', () => {
     characterController = app.get<CharacterController>(CharacterController);
   });
 
-  describe('getLuck', () => {
+  describe('getLuckBySearch', () => {
     it('should return Luke Skywalker', async () => {
       const lukeName: string = 'Luke Skywalker';
       const query: { search: string } = { search: 'luke' };
       const data = await characterController.findAll(Object(query));
-      console.log(data);
       expect(data.results[0].name).toBe(lukeName);
+    });
+  });
+
+  describe('getLuckById', () => {
+    it('should return Luke Skywalker', async () => {
+      const lukeName: string = 'Luke Skywalker';
+      const params: { id: number } = { id: 1 };
+      const data = await characterController.findOne(Object(params));
+      expect(data.name).toBe(lukeName);
     });
   });
 });
