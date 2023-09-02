@@ -1,0 +1,26 @@
+import { Test, TestingModule } from '@nestjs/testing';
+import { CharacterController } from './characters.controller';
+import { CharacterService } from './characters.service';
+
+describe('AppController', () => {
+  let characterController: CharacterController;
+
+  beforeEach(async () => {
+    const app: TestingModule = await Test.createTestingModule({
+      controllers: [CharacterController],
+      providers: [CharacterService],
+    }).compile();
+
+    characterController = app.get<CharacterController>(CharacterController);
+  });
+
+  describe('getLuck', () => {
+    it('should return Luke Skywalker', async () => {
+      const lukeName: string = 'Luke Skywalker';
+      const query: { search: string } = { search: 'luke' };
+      const data = await characterController.findAll(Object(query));
+      console.log(data);
+      expect(data.results[0].name).toBe(lukeName);
+    });
+  });
+});
