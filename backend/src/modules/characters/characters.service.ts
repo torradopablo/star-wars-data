@@ -7,12 +7,13 @@ import { stringify } from 'querystring';
 import { PointerCharactersModel } from './models/pointer-characters.mode';
 import { Character } from './interfaces/characters.interface';
 import { CharacterModel } from './models/characters.model';
+import Endpoints from '../../config/endpoints.config';
 
 @Injectable()
 export class CharacterService {
   async findAll(query: JSON): Promise<PointerCharacters> {
     try {
-      const baseURL = 'https://swapi.dev/api/people/';
+      const baseURL = `${Endpoints.apiSw}/people/`;
       const queryParams = stringify(Object(query));
       const urlWithQuery = `${baseURL}?${queryParams}`;
       const { data } = await axios.get(urlWithQuery);
@@ -25,7 +26,7 @@ export class CharacterService {
   }
   async findOne(id: number): Promise<Character> {
     try {
-      const baseURL = 'https://swapi.dev/api/people/' + id;
+      const baseURL = `${Endpoints.apiSw}/people/${id}`;
       const urlWithQuery = `${baseURL}`;
       const { data } = await axios.get(urlWithQuery);
       const myData = plainToClass(CharacterModel, data);
