@@ -35,4 +35,14 @@ export class FilmController {
   findOne(@Param() params: { id: number }): Promise<Film> {
     return this.filmService.findOne(params.id);
   }
+
+  @Get('/:id/details')
+  @ApiCreatedResponse({
+    description: 'Get one film information by id with details',
+    type: FilmModel,
+  })
+  @ApiParam({ name: 'id', description: 'ID of film', type: Number })
+  findOneWithDetails(@Param() params: { id: number }): Promise<Film> {
+    return this.filmService.findOneWithDetails(params.id);
+  }
 }

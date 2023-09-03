@@ -36,7 +36,6 @@ export class CharacterService {
       throw error;
     }
   }
-
   async findOneWithDetails(id: number): Promise<Character> {
     try {
       const baseURL = `${Endpoints.apiSw}/people/${id}`;
@@ -44,7 +43,6 @@ export class CharacterService {
       const { data } = await axios.get(urlWithQuery);
       const myData = plainToClass(CharacterModel, data);
       await validate(myData, { skipMissingProperties: true });
-
       for (const key in myData) {
         if (Array.isArray(myData[key])) {
           const urls = myData[key];
@@ -56,9 +54,12 @@ export class CharacterService {
           } else {
             myData[key] = resAxiosArray.map((objeto) => objeto['name']);
           }
+        } else {
+          if (key === 'homeworld') {
+            myData[key] = (await axios.get(myData[key])).data.name;
+          }
         }
       }
-
       return myData;
     } catch (error) {
       throw error;

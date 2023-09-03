@@ -36,4 +36,26 @@ export class FilmService {
       throw error;
     }
   }
+  async findOneWithDetails(id: number): Promise<Film> {
+    try {
+      const baseURL = `${Endpoints.apiSw}/films/${id}`;
+      const urlWithQuery = `${baseURL}`;
+      const { data } = await axios.get(urlWithQuery);
+      const myData = plainToClass(FilmModel, data);
+      await validate(myData, { skipMissingProperties: true });
+
+      for (const key in myData) {
+        if (Array.isArray(myData[key])) {
+          const urls = myData[key];
+          const resAxiosArray = (
+            await Promise.all(urls.map((url) => axios.get(url)))
+          ).map((el) => el.data);
+          myData[key] = resAxiosArray.map((objeto) => objeto['name']);
+        }
+      }
+      return myData;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
