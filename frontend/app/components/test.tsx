@@ -1,8 +1,9 @@
 import React from 'react'
+import { Endpoints } from '../config/endpoints.config'
 
 function Test() {
   return (
-    <div className='text-white'>test</div>
+    <div className='text-white'>{Endpoints.apiUrl}</div>
   )
 }
 
