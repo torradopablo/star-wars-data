@@ -7,7 +7,7 @@ import StarWarsSearch from './searcher';
 const Tabs: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>('Characters');
   const [loading, setLoading] = useState<boolean>(false);
-  const [data, setData] = useState<any[]>([]);
+  const [data, setData] = useState<[{name:string}] | [ {little:string}] | [] >([]);
 
   const handleTabClick = async (tabName: string, endpoint: string) => {
     try {

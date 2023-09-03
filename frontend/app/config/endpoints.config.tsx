@@ -1,3 +1,3 @@
 export  const Endpoints = {
-  apiUrl: "http://localhost:3000",//process.env.API_URL,
+  apiUrl: process.env.API_URL,
 };

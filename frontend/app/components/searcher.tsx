@@ -7,14 +7,14 @@ import { Endpoints } from '../config/endpoints.config';
 
 
 interface ComponenteBProps {
-    data: any[];
+    data: [{name:string}] | [ {little:string}] | [];
     endpoint: string;
   }
 
 const StarWarsSearch: React.FC<ComponenteBProps> = ({ data, endpoint }) => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
-  const [dataPrint, setDataPrint] = useState<any>(data);
+  const [dataPrint, setDataPrint] = useState<[{name:string}] | [ {little:string}] | []>(data);
 
   const handleSearch = async () => {
     setLoading(true)
@@ -51,7 +51,8 @@ const StarWarsSearch: React.FC<ComponenteBProps> = ({ data, endpoint }) => {
             <div className="container mx-auto mt-24 ">
                     <div className="text-white grid sm:grid-cols-1 md:grid-cols-4 grid-cols-2 gap-4">
                     {
-                        dataPrint.map((el: Object) => (
+                        // eslint-disable-next-line react/jsx-key
+                        dataPrint.map((el: any) => (
                             // eslint-disable-next-line react/jsx-key
                             <StarWarsCard name={el.name??el.title} description={''}/>
                         ))
