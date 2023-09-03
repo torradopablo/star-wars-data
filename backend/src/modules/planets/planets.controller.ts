@@ -31,8 +31,18 @@ export class PlanetController {
     description: 'Get one planet information by id',
     type: PlanetModel,
   })
-  @ApiParam({ name: 'id', description: 'ID of character', type: Number })
+  @ApiParam({ name: 'id', description: 'ID of planet', type: Number })
   findOne(@Param() params: { id: number }): Promise<Planet> {
     return this.planetService.findOne(params.id);
+  }
+
+  @Get('/:id/details')
+  @ApiCreatedResponse({
+    description: 'Get one planet information by id with details',
+    type: PlanetModel,
+  })
+  @ApiParam({ name: 'id', description: 'ID of planet', type: Number })
+  findOneWithDetails(@Param() params: { id: number }): Promise<Planet> {
+    return this.planetService.findOneWithDetails(params.id);
   }
 }
