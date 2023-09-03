@@ -58,7 +58,9 @@ npm install
 ```
 4. Set environments
 
-(to define)
+```
+NEXT_PUBLIC_BACKEND_URL=http://localhost:3000
+```
 
 5. Change to the project directory:
 ```
@@ -78,6 +80,7 @@ npm start
 ```
 
 The backend server will run on [http://localhost:3000](http://localhost:3000). 
+
 The Swagger docs is accesible on [http://localhost:3000/api](http://localhost:3000/api).
 
 
