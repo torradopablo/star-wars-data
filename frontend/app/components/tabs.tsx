@@ -2,7 +2,7 @@
 
 import { Paper, Tab, Tabs } from "@mui/material";
 import { useState } from "react";
-import  Table  from './table';
+import  Card  from './card';
 
 function StarWarsTabs() {
   const [tabValue, setTabValue] = useState<number>(0);
@@ -12,7 +12,7 @@ function StarWarsTabs() {
   };
 
   return (
-    <Paper className="bg-black bg-opacity-80  text-white w-full h-screen mx-auto " elevation={3}>
+    <Paper className="bg-black bg-opacity-50 text-white w-full h-screen mx-auto " elevation={3}>
       <Tabs
         value={tabValue}
         onChange={handleChange}
@@ -62,7 +62,7 @@ function StarWarsTabs() {
         )}
         {tabValue === 3 && (
           <div>
-            <Table />
+            <Card />
             {/* Agrega aquí tu contenido para la pestaña de naves */}
           </div>
         )}
