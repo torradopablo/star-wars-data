@@ -65,7 +65,7 @@ NEXT_PUBLIC_BACKEND_URL=http://localhost:3000
 5. Change to the project directory:
 ```
 cd ../frontend
-npm start
+npm install
 ```
 
 ## Usage
