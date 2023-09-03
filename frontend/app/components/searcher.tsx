@@ -20,13 +20,13 @@ const StarWarsSearch: React.FC<ComponenteBProps> = ({ data }) => {
         <input
           type="text"
           placeholder="Buscar en Star Wars"
-          className="rounded-l-md p-2 outline-none border-t border-b border-l text-gray-800"
+          className="rounded-2xl mr-2 p-2 outline-none border-t border-b border-l text-gray-800"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
         <button
           onClick={handleSearch}
-          className="bg-yellow-500 rounded-r-md px-4 py-2 border-t border-b border-r border-gray-800 text-white hover:bg-yellow-600"
+          className="bg-yellow-500 rounded-2xl px-4 py-2 border-t border-b border-r border-gray-800 text-white hover:bg-yellow-600"
         >
           <span role="img" aria-label="Lupa">
             Search
@@ -37,6 +37,7 @@ const StarWarsSearch: React.FC<ComponenteBProps> = ({ data }) => {
         <div className="text-white grid sm:grid-cols-1 md:grid-cols-4 grid-cols-2 gap-4">
         {
             data.map((el: Object) => (
+              // eslint-disable-next-line react/jsx-key
               <StarWarsCard name={el.name??el.title} description={''}/>
             ))
         }

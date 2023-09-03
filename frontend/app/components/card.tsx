@@ -7,7 +7,7 @@ interface StarWarsCardProps {
 
 const StarWarsCard: React.FC<StarWarsCardProps> = ({ name, description }) => {
   return (
-    <div className="bg-slate-600  shadow-2xl w-auto rounded-full p-4 m-2 text-white text-center ">
+    <div className="bg-[#13181f]  shadow-2xl w-auto rounded-full p-4 m-2 text-white text-center ">
       <h2 className="text-xl font-semibold mb-2">{name}</h2>
       <p>{description}</p>
     </div>
