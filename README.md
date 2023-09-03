@@ -97,12 +97,6 @@ The frontend will be accessible in your web browser at [http://localhost:3001](h
 
 The apps is deployed in the following links:
 
-### Netlify
-
-[Backend Swagger Docs](https://star-wars-data-backend.netlify.app)
-
-[Webapp](https://star-wars-data-ui.netlify.app)
-
 ### Railway
 
 [Backend Swagger Docs](https://star-wars-data-production.up.railway.app/api)
