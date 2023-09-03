@@ -1,3 +1,3 @@
 export  const Endpoints = {
-  apiUrl: process.env.API_URL,
+  apiUrl: process.env.NEXT_PUBLIC_BACKEND_URL,
 };
