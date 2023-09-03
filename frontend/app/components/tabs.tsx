@@ -2,7 +2,7 @@
 
 import { Paper, Tab, Tabs } from "@mui/material";
 import { useState } from "react";
-import  Card  from './card';
+import  StarWarsCard  from './card';
 
 function StarWarsTabs() {
   const [tabValue, setTabValue] = useState<number>(0);
@@ -12,14 +12,12 @@ function StarWarsTabs() {
   };
 
   return (
-    <Paper className="bg-black bg-opacity-50 text-white w-full h-screen mx-auto " elevation={3}>
+    <Paper className="bg-gradient-to-r from-indigo-900 text-white w-full h-screen mx-auto" elevation={3}>
       <Tabs
         value={tabValue}
         onChange={handleChange}
         centered
-        indicatorColor="primary"
-        textColor="inherit"
-        className="space-x-4"
+        className="space-x-4 text-white"
       >
         <Tab
           label="Characters"
@@ -62,7 +60,10 @@ function StarWarsTabs() {
         )}
         {tabValue === 3 && (
           <div>
-            <Card />
+            <StarWarsCard
+        title="Luke Skywalker"
+        description="A Jedi Knight who fought in the Galactic Civil War."
+      />
             {/* Agrega aquí tu contenido para la pestaña de naves */}
           </div>
         )}
