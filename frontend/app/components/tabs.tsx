@@ -65,31 +65,9 @@ const Tabs: React.FC = () => {
 
       <div className="mt-20  w-full flex flex-col items-center justify-center ">
         {loading ? (
-          <p className="mt-7  text-gray-800">Cargando...</p>
+          <p className="mt-7  text-gray-800">Loading...</p>
         ) : (
-          <div>
-            {activeTab === 'Characters' && (
-              <StarWarsSearch data={data} />
-            )}
-
-            {activeTab === 'Films' && (
-
-              <StarWarsSearch data={data} />
-
-            )}
-
-            {activeTab === 'Starships' && (
-              <StarWarsSearch data={data} />
-            )}
-
-            {activeTab === 'Planets' && (
-              <ul>
-                {data.map((planet: any) => (
-                  <li key={planet.name}>{planet.name}</li>
-                ))}
-              </ul>
-            )}
-          </div>
+          <StarWarsSearch data={data} endpoint={activeTab.toLowerCase()}/>
         )}
       </div>
     </div>

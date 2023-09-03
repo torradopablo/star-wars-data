@@ -2,24 +2,35 @@
 
 import React, { useState } from 'react';
 import StarWarsCard from './card';
+import axios from 'axios';
+import { Endpoints } from '../config/endpoints.config';
+
 
 interface ComponenteBProps {
     data: any[];
+    endpoint: string;
   }
 
-const StarWarsSearch: React.FC<ComponenteBProps> = ({ data }) => {
+const StarWarsSearch: React.FC<ComponenteBProps> = ({ data, endpoint }) => {
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
+  const [dataPrint, setDataPrint] = useState<any>(data);
 
-  const handleSearch = () => {
-    alert(`Buscando: ${searchTerm}`);
+  const handleSearch = async () => {
+    setLoading(true)
+    const { data } = await axios.get(`${Endpoints.apiUrl}/${endpoint}/?search=${searchTerm}`);
+    setDataPrint(data.results)
+    setLoading(false)
   };
+
+
 
   return (
     <div className="flex flex-col justify-center items-center mt-8 ">
       <div className="flex flex-row">
         <input
           type="text"
-          placeholder="Buscar en Star Wars"
+          placeholder="Search en Star Wars"
           className="rounded-2xl mr-2 p-2 outline-none border-t border-b border-l text-gray-800"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
@@ -33,16 +44,23 @@ const StarWarsSearch: React.FC<ComponenteBProps> = ({ data }) => {
           </span>         
         </button>
       </div>
-      <div className="container mx-auto mt-24 ">
-        <div className="text-white grid sm:grid-cols-1 md:grid-cols-4 grid-cols-2 gap-4">
-        {
-            data.map((el: Object) => (
-              // eslint-disable-next-line react/jsx-key
-              <StarWarsCard name={el.name??el.title} description={''}/>
-            ))
-        }
-        </div>
-      </div>
+      {
+        loading ? (
+            <p className="mt-7  text-gray-800">Loading...</p>
+          ) : (
+            <div className="container mx-auto mt-24 ">
+                    <div className="text-white grid sm:grid-cols-1 md:grid-cols-4 grid-cols-2 gap-4">
+                    {
+                        dataPrint.map((el: Object) => (
+                            // eslint-disable-next-line react/jsx-key
+                            <StarWarsCard name={el.name??el.title} description={''}/>
+                        ))
+                    }
+                    </div>
+            </div>
+          )
+      }
+      
     </div>
   );
 };
