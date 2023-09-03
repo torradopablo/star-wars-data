@@ -1,75 +1,77 @@
 "use client"
 
-import { Paper, Tab, Tabs } from "@mui/material";
-import { useState } from "react";
-import  StarWarsCard  from './card';
+import React, { useState } from 'react';
+import { Endpoints } from '../config/endpoints.config';
+import StarWarsSearch from './searcher';
 
-function StarWarsTabs() {
-  const [tabValue, setTabValue] = useState<number>(0);
+const Tabs: React.FC = () => {
+  const [activeTab, setActiveTab] = useState<string>('Characters');
+  const [loading, setLoading] = useState<boolean>(false);
+  const [data, setData] = useState<[{name:string}] | [ {little:string}] | [] >([]);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setTabValue(newValue);
+  const handleTabClick = async (tabName: string, endpoint: string) => {
+    try {
+      setLoading(true);
+
+      //const response = await fetch(`https://swapi.dev/api/${endpoint}/`);
+      const response = await fetch(`${Endpoints.apiUrl}/${endpoint}/`);
+      const jsonData = await response.json();
+
+      setData(jsonData.results);
+      setActiveTab(tabName);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      setLoading(false);
+    }
   };
 
   return (
-    <Paper className="bg-gradient-to-r from-indigo-900 text-white w-full h-screen mx-auto" elevation={3}>
-      <Tabs
-        value={tabValue}
-        onChange={handleChange}
-        centered
-        className="space-x-4 text-white"
-      >
-        <Tab
-          label="Characters"
-          className="font-starjedi text-white"
-        />
-        <Tab
-          label="Films"
-          className="font-starjedi text-white"
-        />
-        <Tab
-          label="Starships"
-          className="font-starjedi text-white"
-        />
-        <Tab
-          label="Planets"
-          className="font-starjedi text-white"
-        />
-      </Tabs>
+    <div className="flex flex-col w-screen h-screen md:p-4 p-2 items-center  ">
+      <div className="flex md:space-x-10 space-x-3  ">
+        <button
+          onClick={() => handleTabClick('Characters', 'characters')}
+          className={`px-4 py-2 border rounded-3xl   ${
+            activeTab === 'Characters' ? 'bg-gray-800 text-yellow-600' : 'bg-gray-200 text-gray-800'
+          }`}
+        >
+          Characters
+        </button>
+        <button
+          onClick={() => handleTabClick('Films', 'films')}
+          className={`px-4 py-2 border rounded-3xl ${
+            activeTab === 'Films' ? 'bg-gray-800 text-yellow-600' : 'bg-gray-200 text-gray-800'
+          }`}
+        >
+          Films
+        </button>
+        <button
+          onClick={() => handleTabClick('Starships', 'starships')}
+          className={`px-4 py-2 border rounded-3xl ${
+            activeTab === 'Starships' ? 'bg-gray-800 text-yellow-600' : 'bg-gray-200 text-gray-800'
+          }`}
+        >
+          Starships
+        </button>
+        <button
+          onClick={() => handleTabClick('Planets', 'planets')}
+          className={`px-4 py-2 border rounded-3xl ${
+            activeTab === 'Planets' ? 'bg-gray-800 text-yellow-600' : 'bg-gray-200 text-gray-800'
+          }`}
+        >
+          Planets
+        </button>
+      </div>
 
-      <div
-        className="flex justify-center items-center h-full text-xl"
-      >
-        {tabValue === 0 && (
-          <div>
-            <p>Lista de personajes de Star Wars.</p>
-            {/* Agrega aquí tu contenido para la pestaña de personajes */}
-          </div>
-        )}
-        {tabValue === 1 && (
-          <div>
-            <p>Lista de planetas de Star Wars.</p>
-            {/* Agrega aquí tu contenido para la pestaña de planetas */}
-          </div>
-        )}
-        {tabValue === 2 && (
-          <div>
-            <p>Lista de naves de Star Wars.</p>
-            {/* Agrega aquí tu contenido para la pestaña de naves */}
-          </div>
-        )}
-        {tabValue === 3 && (
-          <div>
-            <StarWarsCard
-        title="Luke Skywalker"
-        description="A Jedi Knight who fought in the Galactic Civil War."
-      />
-            {/* Agrega aquí tu contenido para la pestaña de naves */}
-          </div>
+      <div className="mt-20  w-full flex flex-col items-center justify-center ">
+        {loading ? (
+          <p className="mt-7  text-gray-800">Loading...</p>
+        ) : (
+          <StarWarsSearch data={data} endpoint={activeTab.toLowerCase()}/>
         )}
       </div>
-    </Paper>
+    </div>
   );
-}
+};
 
-export default StarWarsTabs;
+export default Tabs;
