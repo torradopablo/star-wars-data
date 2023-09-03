@@ -1,14 +1,14 @@
 import React from 'react'
 
 interface StarWarsCardProps {
-  title: string;
+  name: string;
   description: string;
 }
 
-const StarWarsCard: React.FC<StarWarsCardProps> = ({ title, description }) => {
+const StarWarsCard: React.FC<StarWarsCardProps> = ({ name, description }) => {
   return (
-    <div className="bg-black shadow-2xl  rounded-lg p-4 m-2 w-64 text-white ">
-      <h2 className="text-xl font-semibold mb-2">{title}</h2>
+    <div className="bg-slate-600  shadow-2xl w-auto rounded-full p-4 m-2 text-white text-center ">
+      <h2 className="text-xl font-semibold mb-2">{name}</h2>
       <p>{description}</p>
     </div>
   );
