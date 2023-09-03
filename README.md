@@ -17,13 +17,13 @@
 
 ## Introduction
 
-The Star Wars Data Project is a web application that provides information about the Star Wars universe. It includes both a backend and a frontend component, allowing users to explore various data related to the Star Wars franchise, such as characters, planets, starships, and films.
+The Star Wars Data Project is a web application that provides information about the Star Wars universe. It includes both a backend and a frontend component, allowing users to explore various data related to Star Wars, such as characters, planets, starships, and films.
 
 ## Features
 
-- Retrieve detailed information about Star Wars characters, including their names, affiliations, and characteristics.
+- Retrieve detailed information about Star Wars characters.
 - Explore information about planets, starships, and planets from the Star Wars universe.
-- Get insights into the Star Wars films, including their titles, release dates, and key details.
+- Get insights into the Star Wars films, including their titles, and key details.
 - Enjoy a user-friendly and intuitive interface for a seamless browsing experience.
 
 ## Getting Started
@@ -34,7 +34,7 @@ To get started with the Star Wars Data Project, follow the instructions below.
 
 Before you begin, ensure you have the following tools installed:
 
-- Node.js (v14 or later)
+- Node.js (v16 or later)
 - npm (Node Package Manager)
 
 ### Installation
@@ -99,9 +99,9 @@ The apps is deployed in the following links:
 
 ### Netlify
 
-[Backend Swagger Docs]()
+[Backend Swagger Docs](https://star-wars-data-backend.netlify.app)
 
-[Webapp]()
+[Webapp](https://star-wars-data-ui.netlify.app)
 
 ### Railway
 
