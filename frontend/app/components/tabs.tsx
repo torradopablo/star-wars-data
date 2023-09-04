@@ -7,7 +7,7 @@ import StarWarsSearch from './searcher';
 const Tabs: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>('Characters');
   const [loading, setLoading] = useState<boolean>(false);
-  const [data, setData] = useState<[{name:string}] | [ {little:string}] | [] >([]);
+  const [data, setData] = useState<[{url:string, name:string}] | [ {url:string, title:string}] | [] >([]);
 
   const handleTabClick = async (tabName: string, endpoint: string) => {
     try {
@@ -31,7 +31,7 @@ const Tabs: React.FC = () => {
       <div className="flex md:space-x-10 space-x-3  ">
         <button
           onClick={() => handleTabClick('Characters', 'characters')}
-          className={`px-4 py-2 border rounded-3xl   ${
+          className={`px-4 py-2  rounded-3xl   ${
             activeTab === 'Characters' ? 'bg-gray-800 text-yellow-600' : 'bg-gray-200 text-gray-800'
           }`}
         >
@@ -39,7 +39,7 @@ const Tabs: React.FC = () => {
         </button>
         <button
           onClick={() => handleTabClick('Films', 'films')}
-          className={`px-4 py-2 border rounded-3xl ${
+          className={`px-4 py-2 rounded-3xl ${
             activeTab === 'Films' ? 'bg-gray-800 text-yellow-600' : 'bg-gray-200 text-gray-800'
           }`}
         >
@@ -47,7 +47,7 @@ const Tabs: React.FC = () => {
         </button>
         <button
           onClick={() => handleTabClick('Starships', 'starships')}
-          className={`px-4 py-2 border rounded-3xl ${
+          className={`px-4 py-2 rounded-3xl ${
             activeTab === 'Starships' ? 'bg-gray-800 text-yellow-600' : 'bg-gray-200 text-gray-800'
           }`}
         >
@@ -55,7 +55,7 @@ const Tabs: React.FC = () => {
         </button>
         <button
           onClick={() => handleTabClick('Planets', 'planets')}
-          className={`px-4 py-2 border rounded-3xl ${
+          className={`px-4 py-2 rounded-3xl ${
             activeTab === 'Planets' ? 'bg-gray-800 text-yellow-600' : 'bg-gray-200 text-gray-800'
           }`}
         >

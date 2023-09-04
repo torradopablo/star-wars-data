@@ -7,14 +7,14 @@ import { Endpoints } from '../config/endpoints.config';
 
 
 interface ComponenteBProps {
-    data: [{name:string}] | [ {little:string}] | [];
+    data: [{url:string, name:string}] | [ {url:string, title:string}] | [];
     endpoint: string;
   }
 
 const StarWarsSearch: React.FC<ComponenteBProps> = ({ data, endpoint }) => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
-  const [dataPrint, setDataPrint] = useState<[{name:string}] | [ {little:string}] | []>(data);
+  const [dataPrint, setDataPrint] = useState<[{url:string, name:string}] | [ {url:string, title:string}] | []>(data);
 
   const handleSearch = async () => {
     setLoading(true)
@@ -37,14 +37,16 @@ const StarWarsSearch: React.FC<ComponenteBProps> = ({ data, endpoint }) => {
         />
         <button
           onClick={handleSearch}
-          className="bg-yellow-500 rounded-2xl px-4 py-2 border-t border-b border-r border-gray-800 text-white hover:bg-yellow-600"
+          className="bg-yellow-600 rounded-2xl px-4 py-2 border-t border-b border-r border-gray-800 text-white hover:bg-yellow-500"
         >
           <span role="img" aria-label="Lupa">
             Search
           </span>         
         </button>
       </div>
-      {
+     
+     <div>
+     {
         loading ? (
             <p className="mt-7  text-gray-800">Loading...</p>
           ) : (
@@ -54,13 +56,16 @@ const StarWarsSearch: React.FC<ComponenteBProps> = ({ data, endpoint }) => {
                         // eslint-disable-next-line react/jsx-key
                         dataPrint.map((el: any) => (
                             // eslint-disable-next-line react/jsx-key
-                            <StarWarsCard name={el.name??el.title} description={''}/>
+                            <StarWarsCard id={((el.url.split('https://swapi.dev/api/'))[1]).split('/')[1]} name={el.name??el.title} description={''} 
+                            endpoint={endpoint}/>
                         ))
                     }
                     </div>
             </div>
           )
       }
+     </div>
+      
       
     </div>
   );
